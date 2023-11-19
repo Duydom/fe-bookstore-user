@@ -1,0 +1,13 @@
+.main-order{
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.main-order .cart-line-book{
+    padding: 20px 0px;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.main-order .to-cart{
+    cursor: pointer;
+}

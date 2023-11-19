@@ -1,0 +1,59 @@
+.book-detail-main .book-detail-information {
+    padding-left: 40px;
+}
+
+.book-detail-main .book-detail-quantity {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-detail-main .book-detail-price {
+    color: rgb(253, 56, 56);
+    font-size: 30px;
+    font-weight: 600;
+    padding: 20px 0px;
+}
+
+.book-detail-main .book-detail-description .ant-card-body{
+    padding: 10px 20px 10px 20px;
+}
+
+.book-detail-main .book-detail-recomment-icon{
+    background: url("https://cdn0.fahasa.com/media/wysiwyg/icon-menu/icon_dealhot_new.png") no-repeat center center;
+    height: 32px;
+    width: 32px;
+    background-size: contain;
+
+    margin-right: 10px;
+}
+
+
+.book-detail-main .book-detail-recomment-book-price{
+    color: rgb(255, 61, 61);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.book-detail-main .book-detail-recomment-book-title{
+    display: block;
+    color: #000;
+    font-size: 16px;
+    
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-detail-main .book-detail-recomment .ant-card-body{
+    padding: 12px 24px 12px 24px;
+}
+
+.book-detail-main .book-detail-recomment-book:hover{
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09), 0 4px 4px 0px rgba(0, 0, 0, 0.08), 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+}
+
+.book-detail-main .ant-list-item{
+    margin-block-end: 0px !important;
+}
