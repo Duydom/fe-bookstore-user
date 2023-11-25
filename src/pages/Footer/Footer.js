@@ -1,6 +1,7 @@
 import React from 'react'
 import './Footer.css'
 import { Card, Carousel, Col, Row } from 'antd'
+import Menu from '../../components/Menu/Menu';
 const contentStyle = {
   margin: 0,
   height: '400px',
@@ -14,72 +15,47 @@ const contentStyle = {
 };
 function Footer() {
   return (
-    <div className='footer-main'>
-      <Row gutter={[24, 0]} className="mb-24">
-        <Col span={24} md={24}>
-          <img src=""></img>
-        </Col>
-        {/* <Col span={24} md={9}>
-          <Card
-            bordered={false}
-            className="header-solid h-full ant-invoice-card"
-            bodyStyle={{
-              display: 'none',
-              borderRadius: "0px"
-            }}
-            cover={
-              <Carousel autoplay>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/Manga_mainbanner_T10_Slide_840x320_1.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCCMcBooksT1023_Silver_BannerSlide_840x320.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/WimpyKid_banner_840x320.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCCDinhTiT1023_Diamond_BannerSlide_840x320.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCC1980BooksT1023_Gold_BannerSlide_840x320.jpg' style={contentStyle}></img>
-                </div>
-              </Carousel>
-            }
-          >
-          </Card>
-        </Col>
-        <Col span={24} md={9}>
-          <Card
-            bordered={false}
-            className="header-solid h-full ant-invoice-card"
-            bodyStyle={{
-              display: 'none',
-              borderRadius: "0px"
-            }}
-            cover={
-              <Carousel autoplay>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/Manga_mainbanner_T10_Slide_840x320_1.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCCMcBooksT1023_Silver_BannerSlide_840x320.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/WimpyKid_banner_840x320.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCCDinhTiT1023_Diamond_BannerSlide_840x320.jpg' style={contentStyle}></img>
-                </div>
-                <div>
-                  <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCC1980BooksT1023_Gold_BannerSlide_840x320.jpg' style={contentStyle}></img>
-                </div>
-              </Carousel>
-            }
-          >
-          </Card>
-        </Col> */}
-      </Row>
+    <div>
+      {/* <div className='border-footer'>hehe</div> */}
+      <div className='footer-main'>
+        <div style={{ width: "100%" }}>
+          <Row gutter={[0, 0]}>
+            <Col span={24} md={8}>
+              <div style={{
+                display: "flex",
+                flexDirection: "column"
+              }}>
+                <div style={{ fontSize: "18px", fontWeight: "600" }}>DỊCH VỤ</div>
+                <span style={{ margin: "5px 0px" }}>Điều khoản sử dụng</span>
+                <span style={{ margin: "5px 0px" }}>Chính sách bảo mật</span>
+                <span style={{ margin: "5px 0px" }}>Giới thiệu BookStore.com</span>
+              </div>
+            </Col>
+
+            <Col span={24} md={8}>
+              <div style={{
+                display: "flex",
+                flexDirection: "column"
+              }}>
+                <div style={{ fontSize: "18px", fontWeight: "600" }}>HỖ TRỢ</div>
+                <span style={{ margin: "5px 0px" }}>Chính sách đổi trả</span>
+                <span style={{ margin: "5px 0px" }}>Chính sách bảo hành</span>
+                <span style={{ margin: "5px 0px" }}>Chính sách vận chuyển</span>
+              </div>
+            </Col>
+
+            <Col span={24} md={8}>
+              <div style={{
+                display: "flex",
+                flexDirection: "column"
+              }}>
+                <div style={{ fontSize: "18px", fontWeight: "600" }}>LIÊN HỆ</div>
+                <span style={{ margin: "5px 0px" }}>13 Khái Đông 2, Q. Ngũ Hành Sơn, TP. Đà Nẵng</span>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
     </div>
   )
 }

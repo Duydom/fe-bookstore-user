@@ -8,28 +8,28 @@
 }
 
 .main-history .order-sratus {
-    padding: 0px 10px;
+    padding: 3px 10px;
     border-radius: 50px;
 }
 
 .inp,
 .inp:hover {
-    border-color: #ffe927;
-    background: #fae73e;
+    border-color: #ffd500;
+    background: #ffd500;
     color: #000;
 }
 
 .cre,
 .cre:hover {
-    border-color: #279eff;
-    background: #2b9dfa;
+    border-color: #34a2fd;
+    background: #34a2fd;
     color: #000;
 }
 
 .don,
 .don:hover {
-    border-color: #2cbd19;
-    background: #2cbd19;
+    border-color: #41ca01;
+    background: #41ca01;
 }
 
 .can,
