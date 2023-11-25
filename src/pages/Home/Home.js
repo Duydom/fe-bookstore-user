@@ -139,20 +139,21 @@ function Home() {
                                     <Card bordered={false} style={{
                                         outline: "none",
                                         boxShadow: "none",
-                                    }}
-                                        className='home-tag-item'>
-                                        <div style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            alignItems: "center",
-                                        }}>
+                                    }}>
+                                        <div
+                                            className='home-tag-item'
+                                            style={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                alignItems: "center",
+                                            }}>
                                             <Image src={item.image} preview={false}
                                                 height={80}
                                                 width={80}
                                             ></Image>
-                                            <Link to=""
+                                            <span href=""
                                                 className='home-tag-title'
-                                            >{item.title}</Link>
+                                            >{item.title}</span>
                                         </div>
                                     </Card>
                                 </List.Item>

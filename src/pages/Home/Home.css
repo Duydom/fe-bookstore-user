@@ -19,11 +19,21 @@
 
 .home-main .home-list-tag .home-tag-title{
     font-size: 18px;
-    color: #000;
 }
 
 .home-main .home-list-tag .home-tag-title:hover {
     font-size: 18px;
+}
+
+.home-main .home-tag-item{
+    cursor: pointer;
+}
+
+.home-main .home-tag-item a{
+    color: #000;
+}
+
+.home-main .home-tag-item:hover{
     color: rgb(255, 61, 61);
 }
 

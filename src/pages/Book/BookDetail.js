@@ -7,6 +7,7 @@ import AddToCartAPI, { AddToCart } from '../../axios/CartAPI'
 import Waiting from '../Waiting/Waiting';
 import { GetRatingByBook, GetRatingByUser } from '../../axios/RateAPI';
 import { StarFilled } from '@ant-design/icons';
+import moment from 'moment';
 
 function BookDetail() {
     const param = useParams()
@@ -95,16 +96,17 @@ function BookDetail() {
                             >
                                 <div className='book-detail-name'><h2 style={{ margin: "0px", textTransform: "uppercase" }}>{book?.title}</h2></div>
                                 <div className='book-detail-more'>
-                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Nhà xuất bản: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px" }}>{book?.publisher?.name}</div></div>
-                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Năm xuất bản: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px" }}>{book?.publishDate?.slice(0, 4)}</div></div>
-                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Tác giả: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px" }}>{book?.author?.name}</div></div>
-                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Ngôn ngữ: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px" }}>{book?.language}</div></div>
+                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Nhà xuất bản: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.publisher?.name}</div></div>
+                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Năm xuất bản: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.publishDate?.slice(0, 4)}</div></div>
+                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Tác giả: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.author?.name}</div></div>
+                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Ngôn ngữ: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.language}</div></div>
                                     <div style={{ display: "flex", alignItems: "center" }}>Thể loại: {book?.tags?.map((tag, index) => (
                                         <div style={{
                                             border: "1px solid rgba(180,180,180,0.8)",
                                             borderRadius: "2px",
                                             padding: "5px 15px",
                                             margin: "0px 10px",
+                                            fontWeight: "600"
                                         }}>{tag?.name}</div>
                                     ))}</div>
                                 </div>
@@ -205,7 +207,7 @@ function BookDetail() {
                                 }}>
                                     <span style={{
                                         fontSize: "50px"
-                                    }}>{rating?.average?.toFixed(1)}</span>/5
+                                    }}>{rating?.average ? rating?.average?.toFixed(1) : 0}</span>/5
                                 </div>
                                 <div>
                                     {
@@ -224,13 +226,20 @@ function BookDetail() {
                             </div>
                         </div>
                         <div style={{
-                            borderTop: "1px solid red",
-                            marginTop:"24px"
+                            borderTop: "2px solid #b0b0b0",
+                            marginTop: "24px"
                         }}>
                             {
                                 rating?.ratings?.map((rate, index) => (
-                                    <div style={{ display: "flex", marginTop:"10px" }}>
-                                        <div style={{ width: "170px", marginRight: "10px", fontWeight : "600" }}>{rate?.user?.firstName + " " + rate?.user?.lastName}</div>
+                                    <div style={{ display: "flex", marginTop: "10px" }}>
+                                        <div style={{ width: "170px", marginRight: "10px", display : "flex", flexDirection:"column" }}>
+                                            <span style={{fontWeight: "600"}}>
+                                                {rate?.user?.firstName + " " + rate?.user?.lastName}
+                                            </span>
+                                            <span>
+                                                {moment(rate?.create?.slice(0,10)).format('DD/MM/YYYY')}
+                                            </span>
+                                        </div>
                                         <div style={{ width: "calc(100%-180px)" }}>
                                             {
                                                 [1, 2, 3, 4, 5].map((value) => (

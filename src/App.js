@@ -24,11 +24,13 @@ function Layout() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        background : "#F0F0F0"
       }}>
         <div
           style={{
-            width: "80vw",
-            minHeight: "calc(100vh - 180px)",
+            width: "70vw",
+            minHeight: "calc(100vh - 250px)",
+
             // display: "flex",
             // alignItems: "center"
           }}>
