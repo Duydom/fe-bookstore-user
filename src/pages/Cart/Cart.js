@@ -362,7 +362,7 @@ function Cart() {
                                                             fontWeight: "600"
                                                         }}
                                                     >
-                                                        <div style={{ color: "rgb(255, 61, 61)", }}>
+                                                        <div style={{ color: "#C92127", }}>
                                                             {Intl.NumberFormat('vi-VN', {
                                                                 style: 'currency',
                                                                 currency: 'VND',
@@ -394,7 +394,7 @@ function Cart() {
                                             </div>
                                             <div
                                                 style={{
-                                                    color: "rgb(255, 61, 61)",
+                                                    color: "#C92127",
                                                     fontSize: "25px",
                                                     fontWeight: "600"
                                                 }}>
@@ -408,8 +408,8 @@ function Cart() {
                                             width: "100%",
                                             height: "40px",
                                             borderRadius: "2px",
-                                            backgroundColor: "rgb(255, 61, 61)",
-                                            border: "1px solid rgb(255, 61, 61)",
+                                            backgroundColor: "#C92127",
+                                            border: "1px solid #C92127",
                                             color: "#fff",
                                             fontSize: "16px",
                                             marginTop: "20px"

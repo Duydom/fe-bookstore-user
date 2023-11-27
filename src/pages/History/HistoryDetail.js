@@ -17,6 +17,7 @@ function HistoryDetail() {
     const fecthData = async () => {
         setWait(true)
         var res = await GetOrderById(param?.id)
+        console.log(res?.data);
         setHistory(res?.data)
         setWait(false)
     }
