@@ -34,7 +34,7 @@
 }
 
 .home-main .home-tag-item:hover{
-    color: rgb(255, 61, 61);
+    color: #C92127;
 }
 
 .home-main .home-card-list-book .home-icon-list-book{
@@ -61,7 +61,7 @@
 } */
 
 .home-main .home-book-detail-price{
-    color: rgb(255, 61, 61);
+    color: #C92127;
     font-weight: 600;
     font-size: 20px;
 }

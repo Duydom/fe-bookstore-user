@@ -9,7 +9,7 @@
 }
 
 .book-main .book-item-detail-price {
-    color: rgb(255, 61, 61);
+    color: #C92127;
     font-weight: 600;
     font-size: 20px;
 }
@@ -40,12 +40,26 @@
 .book-main .book-filter .book-filter-name:hover {
     border-color: rgb(253, 56, 56) !important;
 }
+
 .book-main .book-filter .book-filter-name:focus {
     border-color: rgb(253, 56, 56) !important;
-    outline: rgba(253, 56, 56,0.5);
+    outline: rgba(253, 56, 56, 0.5);
 }
 
 .book-main .book-filter .ant-checkbox-checked .ant-checkbox-inner {
     background-color: rgb(253, 56, 56) !important;
+    border-color: rgb(253, 56, 56) !important;
+}
+
+
+.book-main .ant-select-single .ant-select-selector:hover {
+    border-color: rgb(253, 56, 56) !important;
+}
+
+.book-main .ant-select-single .ant-select-selector:focus{
+    border-color: rgb(253, 56, 56) !important;
+}
+
+.book-main .ant-select-single .ant-select-focused {
     border-color: rgb(253, 56, 56) !important;
 }

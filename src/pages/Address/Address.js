@@ -168,7 +168,7 @@ function Address() {
                             <Input />
                         </Form.Item>
 
-                        <Form.Item name="state" label="Quận / Thị xã"
+                        <Form.Item name="state" label="Quận / Huyện"
                             rules={[
                                 {
                                     required: true,

@@ -1,11 +1,12 @@
 
 import { Button, Card, Carousel, Checkbox, Col, Image, Input, List, Pagination, Radio, Row, Select, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
-import { GetBooks } from '../../axios/BookAPI';
+import { GetBookTags, GetBooks } from '../../axios/BookAPI';
 import "./Book.css"
 import Waiting from '../Waiting/Waiting';
+import { GetTags } from '../../axios/TagAPI';
 const data = [
     {
         title: 'Title 1',
@@ -107,29 +108,39 @@ const contentStyle = {
     background: '#364d79',
     borderRadius: "10px"
 };
-function Book() {
+function Book(props) {
+    const location = useLocation();
     const [wait, setWait] = useState(false)
     const [page, setPage] = useState(1)
     const [total, setTotal] = useState(0)
     const [key, setkey] = useState("")
+    const [tagId, setTagId] = useState(location?.state?.key? location?.state?.key : 0)
     const [sortBy, setSortBy] = useState("ID")
     const [priceSort, setPriceSort] = useState([])
     const [books, setBook] = useState([])
+    const [tags, setTag] = useState([])
     const navigate = useNavigate();
 
 
     useEffect(() => {
-        fecthData(page, key, sortBy)
+        fecthData(page, key, sortBy, tagId)
     }, [page])
-    const fecthData = async (page, key, sortBy) => {
+
+    const fecthData = async (page, key, sortBy, tagId) => {
+        // console.log("fsdfsd" );
+
         setWait(true)
-        var res = await GetBooks(page, 15, key, sortBy)
+        var res = await GetBookTags(page, 15, key, sortBy, tagId)
         if (res?.code == 200) {
             setBook(res?.data)
             setTotal(res?.total)
         }
 
-        console.log(res?.data);
+        var res = await GetTags(1, 10000, "", "ID")
+        if (res?.code == 200) {
+            setTag(res?.data)
+        }
+
         setWait(false)
     }
     return (
@@ -171,7 +182,43 @@ function Book() {
                                     placeholder='Tên sản phẩm' style={{
                                         borderRadius: "2px",
                                         marginBottom: "10px"
-                                    }}></Input>
+                                    }}>
+
+                                </Input>
+                                <div style={{
+                                    marginBottom: "10px"
+                                }}>Danh mục sản phẩm</div>
+                                <Select style={{
+                                    borderRadius: "2px",
+                                    marginBottom: "10px"
+                                }}
+                                    showSearch
+                                    // placeholder = "Tất cả"
+                                    optionFilterProp="children"
+                                    defaultValue={tagId}
+                                    onChange={(e) => setTagId(e)}
+                                // onSearch={onSearch}
+                                >
+                                    <Select.Option value={0}>
+                                        Tất cả
+                                    </Select.Option>
+                                    {
+                                        tags?.map((tag, index) => (
+                                            <Select.Option value={tag?.id}>
+                                                {tag?.name}
+                                            </Select.Option>
+                                        ))
+                                    }
+                                </Select>
+                                {/* <Input
+                                    onChange={(e) => setkey(e.target.value)}
+                                    className='book-filter-name'
+                                    placeholder='Tên sản phẩm' style={{
+                                        borderRadius: "2px",
+                                        marginBottom: "10px"
+                                    }}>
+
+                                </Input> */}
                                 <div style={{
                                     marginBottom: "10px"
                                 }}>Giá</div>
@@ -194,7 +241,7 @@ function Book() {
                                     border: "2px solid rgba(253, 56, 56,0.5)",
                                     color: "#fff",
                                     borderRadius: "5px"
-                                }} onClick={() => fecthData(page, key, sortBy)}>Tìm kiếm sản phẩm</button>
+                                }} onClick={() => fecthData(page, key, sortBy, tagId)}>Tìm kiếm sản phẩm</button>
                             </div>
                         </Card>
                     </Col>

@@ -104,7 +104,7 @@ function Navbar() {
 
     const handleLogout = () => {
         sessionStorage.clear()
-        window.location.reload()
+        navigate('/')
     }
 
     return (

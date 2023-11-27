@@ -4,6 +4,7 @@ import { ToTopOutlined, PlusOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom';
 import "./Home.css"
 import { GetBooks } from '../../axios/BookAPI';
+import { GetTags } from '../../axios/TagAPI';
 const contentStyle = {
     margin: 0,
     height: '400px',
@@ -52,6 +53,7 @@ const data = [
 function Home() {
     const navigate = useNavigate();
     const [books, setBook] = useState([])
+    const [tags, setTag] = useState([])
 
     useEffect(() => {
         fetchData()
@@ -60,6 +62,10 @@ function Home() {
     const fetchData = async () => {
         var res = await GetBooks(1, 5, "", "ID")
         if (res?.code == 200) setBook(res?.data)
+
+        
+        var res = await GetTags(1, 10000, "", "ID")
+        if (res?.code == 200) setTag(res?.data)
     }
     return (
         <div className='home-main tabled'
@@ -133,28 +139,30 @@ function Home() {
                                 xl: 8,
                                 xxl: 8,
                             }}
-                            dataSource={data}
-                            renderItem={(item) => (
+                            dataSource={tags}
+                            renderItem={(tag, index) => (
                                 <List.Item>
                                     <Card bordered={false} style={{
                                         outline: "none",
                                         boxShadow: "none",
                                     }}>
-                                        <div
-                                            className='home-tag-item'
-                                            style={{
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                alignItems: "center",
-                                            }}>
-                                            <Image src={item.image} preview={false}
-                                                height={80}
-                                                width={80}
-                                            ></Image>
-                                            <span href=""
-                                                className='home-tag-title'
-                                            >{item.title}</span>
-                                        </div>
+                                        <Link state={{key : tag.id}} to={{ pathname: '/book' }} style={{ color: "#000" }}>
+                                            <div
+                                                className='home-tag-item'
+                                                style={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    alignItems: "center",
+                                                }}>
+                                                <Image src={data[index].image} preview={false}
+                                                    height={80}
+                                                    width={80}
+                                                ></Image>
+                                                <span href=""
+                                                    className='home-tag-title'
+                                                >{tag.name}</span>
+                                            </div>
+                                        </Link>
                                     </Card>
                                 </List.Item>
                             )}

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Waiting from '../Waiting/Waiting'
-import { Card, Col, Image, List, Radio, Row, Space, Typography } from 'antd'
+import { Card, Col, Image, Input, List, Radio, Row, Space, Typography } from 'antd'
 import './Order.css'
-import { GetAddressByUser } from '../../axios/AccountAPI'
+import { CreateAddress, GetAddressByUser } from '../../axios/AccountAPI'
 import { CreateOrder, GetShippingModes } from '../../axios/OrderAPI'
 import { useNavigate } from 'react-router-dom'
+import { ClockCircleOutlined, WarningOutlined } from '@ant-design/icons'
 
 function Order() {
     const [wait, setWait] = useState(false)
@@ -12,6 +13,14 @@ function Order() {
     const [books, setBook] = useState([])
     const [quantities, setQuantities] = useState([])
     const [address, setAddress] = useState([])
+    const [guestAddress, setGuestAddress] = useState({
+        name: "",
+        street: "",
+        city: "",
+        state: "",
+        phone: "",
+        userId: 9
+    })
     const [shippingMode, setShippingMode] = useState(1)
     const [shippingModes, setShippingModes] = useState([])
     const navigate = useNavigate();
@@ -47,30 +56,61 @@ function Order() {
     const Order = async () => {
         setWait(true)
 
-        var order = {
-            status: "CRE",
-            description: "",
-            userId: parseInt(sessionStorage.getItem('userId')),
-            shippingModeId: shippingMode,
-            addressId: address?.id,
-            quantitieCounts: [
+        if (!sessionStorage.getItem('userId')) {
+            var res = await CreateAddress(guestAddress)
+            if (res?.code == 200) {
+                var order = {
+                    status: "CRE",
+                    description: "",
+                    userId: 9,//sessionStorage.getItem('userId') ? parseInt(sessionStorage.getItem('userId')) : 9,
+                    shippingModeId: shippingMode,
+                    addressId: res?.data?.id,
+                    quantitieCounts: [
 
-            ],
-            bookIds: [
+                    ],
+                    bookIds: [
 
-            ]
+                    ]
+                }
+                for (var i = 0; i < books?.length; i++) {
+                    order.bookIds.push(books[i]?.id)
+                    order.quantitieCounts.push(quantities[i]?.count)
+                }
+
+                console.log(order);
+
+                var res = await CreateOrder(order)
+
+                if (res?.code == 200) {
+                    navigate('/')
+                }
+            }
+        } else {
+            var order = {
+                status: "CRE",
+                description: "",
+                userId: parseInt(sessionStorage.getItem('userId')),
+                shippingModeId: shippingMode,
+                addressId: address?.id,
+                quantitieCounts: [
+
+                ],
+                bookIds: [
+
+                ]
+            }
+            for (var i = 0; i < books?.length; i++) {
+                order.bookIds.push(books[i]?.id)
+                order.quantitieCounts.push(quantities[i]?.count)
+            }
+
+            console.log(order);
+            var res = await CreateOrder(order)
+
+            if (res?.code == 200) {
+                navigate('/account/history')
+            }
         }
-
-        for (var i = 0; i < books?.length; i++) {
-            order.bookIds.push(books[i]?.id)
-            order.quantitieCounts.push(quantities[i]?.count)
-        }
-
-        var res = await CreateOrder(order)
-        console.log(res);
-        if (res?.code == 200)
-            navigate('/account/history')
-        console.log(order);
         setWait(false)
     }
     return (
@@ -91,7 +131,91 @@ function Order() {
                             )}
                         >
                             {
-                                address?.name + ' - ' + address?.phone + " | " + address?.street + ", " + address?.state + " , " + address?.city
+                                (sessionStorage.getItem("userId")) ?
+                                    (address?.name + ' - ' + address?.phone + " | " + address?.street + ", " + address?.state + " , " + address?.city)
+                                    :
+                                    <div className='guest-address'>
+                                        <div className='guest-line'>
+                                            <span>Tên người nhận</span>
+                                            <Input
+                                                status={guestAddress.name.length > 0 ? "" : "error"}
+                                                prefix={!guestAddress.name.length > 0 ? <WarningOutlined /> : <></>}
+                                                onChange={(e) => {
+                                                    setGuestAddress(a => ({
+                                                        ...a,
+                                                        name: e.target.value
+                                                    }))
+                                                }}
+                                                style={{
+                                                    borderRadius: "2px",
+                                                    marginBottom: "10px"
+                                                }} />
+                                        </div>
+                                        <div className='guest-line'>
+                                            <span>Số điện thoại</span>
+                                            <Input
+                                                type='number'
+                                                status={(guestAddress.phone.length == 10 && guestAddress.phone[0] == '0') ? "" : "error"}
+                                                prefix={!(guestAddress.phone.length == 10 && guestAddress.phone[0] == '0') ? <WarningOutlined /> : <></>}
+                                                onChange={(e) => {
+                                                    setGuestAddress(a => ({
+                                                        ...a,
+                                                        phone: e.target.value
+                                                    }))
+                                                }}
+                                                style={{
+                                                    borderRadius: "2px",
+                                                    marginBottom: "10px"
+                                                }} />
+                                        </div>
+                                        <div className='guest-line'>
+                                            <span>Tỉnh/Thành phố</span>
+                                            <Input
+                                                status={guestAddress.city.length > 0 ? "" : "error"}
+                                                prefix={!guestAddress.city.length > 0 ? <WarningOutlined /> : <></>}
+                                                onChange={(e) => {
+                                                    setGuestAddress(a => ({
+                                                        ...a,
+                                                        city: e.target.value
+                                                    }))
+                                                }}
+                                                style={{
+                                                    borderRadius: "2px",
+                                                    marginBottom: "10px"
+                                                }} />
+                                        </div>
+                                        <div className='guest-line'>
+                                            <span>Quận/Huyện</span>
+                                            <Input
+                                                status={guestAddress.state.length > 0 ? "" : "error"}
+                                                prefix={!guestAddress.state.length > 0 ? <WarningOutlined /> : <></>}
+                                                onChange={(e) => {
+                                                    setGuestAddress(a => ({
+                                                        ...a,
+                                                        state: e.target.value
+                                                    }))
+                                                }}
+                                                style={{
+                                                    borderRadius: "2px",
+                                                    marginBottom: "10px"
+                                                }} />
+                                        </div>
+                                        <div className='guest-line'>
+                                            <span>Địa chỉ</span>
+                                            <Input
+                                                status={guestAddress.street.length > 0 ? "" : "error"}
+                                                prefix={!guestAddress.street.length > 0 ? <WarningOutlined /> : <></>}
+                                                onChange={(e) => {
+                                                    setGuestAddress(a => ({
+                                                        ...a,
+                                                        street: e.target.value
+                                                    }))
+                                                }}
+                                                style={{
+                                                    borderRadius: "2px",
+                                                }} />
+                                        </div>
+                                    </div>
                             }
                         </Card>
                     </Col>
@@ -108,7 +232,7 @@ function Order() {
                                 </div>
                             )}
                         >
-                            <Radio.Group onChange={(e) => setShippingMode(e.target.value)} value={1}>
+                            <Radio.Group onChange={(e) => setShippingMode(e.target.value)} defaultValue={1}>
                                 <Space direction="vertical">
                                     {
                                         shippingModes?.map((item, index) => (
@@ -132,7 +256,7 @@ function Order() {
                                 </div>
                             )}
                         >
-                            <Radio.Group value={1}>
+                            <Radio.Group defaultValue={1}>
                                 <Space direction="vertical">
                                     <Radio value={1}>Thanh toán khi nhận hàng</Radio>
                                     <Radio value={2} disabled><Image src='https://cdn0.fahasa.com/skin/frontend/base/default/images/payment_icon/ico_vnpay.svg?q=10298' />   VN Pay (Đang phát triển)</Radio>
@@ -156,7 +280,7 @@ function Order() {
                             {
                                 books?.map((book, index) => (
                                     <div
-                                        className={`cart-line-book ${index == 0 ? "first" : ""}`}
+                                        className={`order-line-book ${index == 0 ? "first" : ""}`}
                                         style={{
                                             display: "flex",
                                             alignItems: "center",
@@ -212,7 +336,7 @@ function Order() {
                                                 fontWeight: "600"
                                             }}
                                         >
-                                            <div style={{ color: "rgb(255, 61, 61)", }}>
+                                            <div style={{ color: "#C92127", }}>
                                                 {Intl.NumberFormat('vi-VN', {
                                                     style: 'currency',
                                                     currency: 'VND',
@@ -244,7 +368,7 @@ function Order() {
                                     marginBottom: "12px"
                                 }}>
                                     <div style={{ width: "85%", textAlign: "end", fontSize: "18px", fontWeight: "600", }}>Tổng số tiền (VAT)</div>
-                                    <div style={{ width: "10%", textAlign: "end", fontSize: "20px", fontWeight: "600", color: "rgb(255, 61, 61)", }}>
+                                    <div style={{ width: "10%", textAlign: "end", fontSize: "20px", fontWeight: "600", color: "#C92127", }}>
                                         {Intl.NumberFormat('vi-VN', {
                                             style: 'currency',
                                             currency: 'VND',
@@ -268,8 +392,8 @@ function Order() {
                                         width: "120px",
                                         height: "40px",
                                         borderRadius: "2px",
-                                        backgroundColor: "rgb(255, 61, 61)",
-                                        border: "1px solid rgb(255, 61, 61)",
+                                        backgroundColor: "#C92127",
+                                        border: "1px solid #C92127",
                                         color: "#fff",
                                         fontSize: "16px",
                                         // fontWeight:"600"
