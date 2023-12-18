@@ -192,7 +192,7 @@ function Cart() {
     }
     const ChangeQuantity = async (index, number) => {
         setWait(true)
-        var res = await AddToCart(sessionStorage.getItem('userId'), cart?.books[index]?.id, number)
+        var res = await AddToCart(sessionStorage.getItem('userId'), cart[index]?.book?.id, number)
         if (res?.code == 200) {
             setTimeout(() => {
                 window.location.reload()
@@ -206,10 +206,10 @@ function Cart() {
             books : [],
             quantities : []
         }
-        for (var i = 0; i < cart?.books.length; i++) {
+        for (var i = 0; i < cart?.length; i++) {
             if (checkes[i] == true){
-            order.books.push(cart?.books[i])
-            order.quantities.push(cart?.quantities[i])}
+            order.books.push(cart[i]?.book)
+            order.quantities.push(cart[i]?.quantity)}
         }
 
         if (order.books.length > 0) {
@@ -287,7 +287,7 @@ function Cart() {
                                         // fontSize: "16px"
                                     }}>
                                         {
-                                            cart?.books?.map((book, index) => (
+                                            cart?.map((item, index) => (
                                                 <div
                                                     className={`cart-line-book ${index == 0 ? "first" : ""}`}
                                                     style={{
@@ -296,8 +296,8 @@ function Cart() {
                                                     }}>
                                                     <div style={{ width: "60%", display: "flex" }}>
                                                         <Checkbox checked={checkes[index]} className='cart-all' style={{ marginRight: "30px" }} onChange={() => ChooseBook(index)}></Checkbox>
-                                                        <Image src={book?.image} preview={false}
-                                                            onClick={() => navigate(`/book/${cart?.books[index]?.id}`)}
+                                                        <Image src={item?.book?.image} preview={false}
+                                                            onClick={() => navigate(`/book/${item?.book?.id}`)}
                                                             style={{
                                                                 width: "100px",
                                                                 height: "100px",
@@ -310,7 +310,7 @@ function Cart() {
                                                             flexDirection: "column",
                                                             justifyContent: "space-between"
                                                         }}>
-                                                            <div style={{ fontSize: "16px" }}>{book?.title}</div>
+                                                            <div style={{ fontSize: "16px" }}>{item?.book?.title}</div>
                                                             <div style={{
                                                                 fontSize: "18px",
                                                                 fontWeight: "600"
@@ -318,7 +318,7 @@ function Cart() {
                                                                 {Intl.NumberFormat('vi-VN', {
                                                                     style: 'currency',
                                                                     currency: 'VND',
-                                                                }).format(book?.price)}
+                                                                }).format(item?.book?.price)}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -336,7 +336,7 @@ function Cart() {
                                                                 padding: "0px 10px",
                                                                 fontSize: "18px",
                                                                 fontWeight: "600"
-                                                            }} disabled={cart?.quantities[index]?.count == 1 ?? true} onClick={() => ChangeQuantity(index, -1)}>-</button>
+                                                            }} disabled={item?.quantity == 1 ?? true} onClick={() => ChangeQuantity(index, -1)}>-</button>
                                                             <div style={{
                                                                 width: "40px",
                                                                 display: "flex",
@@ -344,7 +344,7 @@ function Cart() {
                                                                 alignItems: "center",
                                                                 fontSize: "18px",
                                                                 fontWeight: "600"
-                                                            }}>{cart?.quantities[index]?.count}</div>
+                                                            }}>{item?.quantity}</div>
                                                             <button style={{
                                                                 border: "0",
                                                                 padding: "0px 10px",
@@ -366,10 +366,10 @@ function Cart() {
                                                             {Intl.NumberFormat('vi-VN', {
                                                                 style: 'currency',
                                                                 currency: 'VND',
-                                                            }).format(book?.price * cart?.quantities[index]?.count)}
+                                                            }).format(item?.book?.price * item?.quantity)}
                                                         </div>
                                                         <div>
-                                                            <DeleteOutlined onClick={() => ChangeQuantity(index, -cart?.quantities[index]?.count)} />
+                                                            <DeleteOutlined onClick={() => ChangeQuantity(index, -item?.quantity)} />
                                                         </div>
                                                     </div>
                                                 </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { ToTopOutlined, PlusOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom';
 import "./Home.css"
-import { GetBooks } from '../../axios/BookAPI';
+import { GetBookById, GetBookByIds, GetBooks, GetBooksRecomend } from '../../axios/BookAPI';
 import { GetTags } from '../../axios/TagAPI';
 const contentStyle = {
     margin: 0,
@@ -53,6 +53,7 @@ const data = [
 function Home() {
     const navigate = useNavigate();
     const [books, setBook] = useState([])
+    const [bookRecomends, setBookRecomend] = useState([])
     const [tags, setTag] = useState([])
 
     useEffect(() => {
@@ -63,7 +64,12 @@ function Home() {
         var res = await GetBooks(1, 5, "", "ID")
         if (res?.code == 200) setBook(res?.data)
 
-        
+        var res = await GetBooksRecomend(3)
+        if (res?.code == 200) {
+            var response = await GetBookByIds(res?.data)
+            if(response?.code == 200) setBookRecomend(response?.data)
+        }
+
         var res = await GetTags(1, 10000, "", "ID")
         if (res?.code == 200) setTag(res?.data)
     }
@@ -146,7 +152,7 @@ function Home() {
                                         outline: "none",
                                         boxShadow: "none",
                                     }}>
-                                        <Link state={{key : tag.id}} to={{ pathname: '/book' }} style={{ color: "#000" }}>
+                                        <Link state={{ key: tag.id}} to={{ pathname: '/book' }} style={{ color: "#000" }}>
                                             <div
                                                 className='home-tag-item'
                                                 style={{
@@ -265,7 +271,7 @@ function Home() {
                                     alignItems: "center"
                                 }}
                             >
-                                <span className='home-icon-list-book'></span>
+                                <span className='home-icon-list-book most'></span>
                                 <h3 style={{
                                     margin: 0
                                 }}>SÁCH NỔI BẬT</h3>
@@ -349,6 +355,7 @@ function Home() {
                     </Card>
                 </Col>
             </Row>
+
             <Row gutter={[24, 0]} className="mb-24">
                 <Col span={24} md={24}>
                     <Card style={{
@@ -362,7 +369,7 @@ function Home() {
                                     alignItems: "center"
                                 }}
                             >
-                                <span className='home-icon-list-book'></span>
+                                <span className='recomend'></span>
                                 <h3 style={{
                                     margin: 0
                                 }}>SÁCH NỔI BẬT</h3>
@@ -380,13 +387,12 @@ function Home() {
                                 xl: 5,
                                 xxl: 5,
                             }}
-                            dataSource={books}
+                            dataSource={bookRecomends}
                             renderItem={(item) => (
                                 <List.Item>
                                     <Card bordered={false}
                                         style={{
                                             // outline: "none",
-                                            // boxShadow: "none",
                                             borderRadius: 0
                                         }}
                                         className='home-book'
@@ -396,15 +402,23 @@ function Home() {
                                             flexDirection: "column",
                                             alignItems: "center",
                                         }}>
-                                            <div>
+                                            <div style={{
+                                                cursor: "pointer"
+                                            }}
+                                                onClick={() => navigate(`/book/${item?.id}`)}>
                                                 <Image src={item?.image} preview={false}
                                                     height={240}
                                                     width={190}
+                                                    style={{
+                                                        objectFit: "cover"
+                                                    }}
                                                 ></Image>
                                                 <div className='home-book-detail'>
-                                                    <Link to=""
+                                                    <Link
                                                         className='home-book-title'
-                                                    >{item?.title}</Link>
+                                                    >
+                                                        {item?.title}
+                                                    </Link>
                                                     <div className='home-book-detail-price'>
                                                         {Intl.NumberFormat('vi-VN', {
                                                             style: 'currency',
@@ -432,7 +446,9 @@ function Home() {
                                 justifyContent: "center",
                                 height: "40px",
                                 width: "150px"
-                            }}>Xem thêm</Button>
+                            }}
+                                onClick={() => navigate("/book")}
+                            >Xem thêm</Button>
                         </div>
                     </Card>
                 </Col>

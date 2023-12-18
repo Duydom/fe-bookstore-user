@@ -42,10 +42,18 @@
     height: 32px;
     width: 32px;
     background-size: contain;
-
     margin-right: 10px;
 }
 
+
+.home-main .home-card-list-book .recomend{
+    background: url("https://cdn0.fahasa.com/media/wysiwyg/icon-menu/icon_dealhot_new.png") no-repeat center center;
+    height: 32px;
+    width: 32px;
+    background-size: contain;
+    margin-right: 10px;
+}
+    
 .home-main .home-card-list-book{
     border: none;
 }

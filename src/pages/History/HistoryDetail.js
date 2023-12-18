@@ -22,10 +22,11 @@ function HistoryDetail() {
         setWait(false)
     }
 
-    const CalculateMoney = (books, quantities) => {
+    const CalculateMoney = (orderBooks) => {
         var total = 0;
-        for (var i = 0; i < books?.length; i++) {
-            total += books[i]?.price * quantities[i]?.count
+        console.log(orderBooks);
+        for (var i = 0; i < orderBooks?.length; i++) {
+            total += orderBooks[i]?.book?.price * orderBooks[i]?.quantity
         }
         return total
     }
@@ -86,7 +87,7 @@ function HistoryDetail() {
                                                         Intl.NumberFormat('vi-VN', {
                                                             style: 'currency',
                                                             currency: 'VND',
-                                                        }).format(CalculateMoney(history?.books, history?.quantities))
+                                                        }).format(CalculateMoney(history?.orderBooks))
                                                     }
                                                 </span>
                                             </div>
@@ -166,41 +167,38 @@ function HistoryDetail() {
                                     >
 
                                         {
-                                            history?.books?.map((book, index) => (
+                                            history?.orderBooks?.map((item, index) => (
                                                 <div style={{
                                                     display: "flex"
                                                 }}>
                                                     <div style={{ width: "15%" }}>
-                                                        <Image preview={false} src={book?.image} style={{ width: "100%", height: "80px", objectFit: "cover" }} />
+                                                        <Image preview={false} src={item?.book?.image} style={{ width: "100%", height: "80px", objectFit: "cover" }} />
                                                     </div>
                                                     <div style={{ width: "40%" }}>
-                                                        {book?.title}
+                                                        {item?.book?.title}
                                                     </div>
                                                     <div style={{ width: "10%" }}>
                                                         {
                                                             Intl.NumberFormat('vi-VN', {
                                                                 style: 'currency',
                                                                 currency: 'VND',
-                                                            }).format(book?.price)
+                                                            }).format(item?.book?.price)
                                                         }
                                                     </div>
                                                     <div style={{ width: "10%" }}>
-                                                        {history?.quantities[index]?.count}
+                                                        {item?.quantity}
                                                     </div>
                                                     <div style={{ width: "15%" }}>
                                                         {
                                                             Intl.NumberFormat('vi-VN', {
                                                                 style: 'currency',
                                                                 currency: 'VND',
-                                                            }).format(book?.price * history?.quantities[index]?.count)
+                                                            }).format(item?.book?.price * item?.quantity)
                                                         }
                                                     </div>
-                                                    {/* <div style={{ width: "10%"}} onClick={() => navigate(`/rating/${param?.id}`)}>
-                                                        Đánh giá
-                                                    </div> */}
                                                     <div style={{ width: "10%" }}>
                                                         {
-                                                            history?.status == "DON" ? <button onClick={() => navigate(`/rating/${book?.id}`)} className='button-rating'>Đánh giá</button> : <></>
+                                                            history?.status == "DON" ? <button onClick={() => navigate(`/rating/${item?.book?.id}`)} className='button-rating'>Đánh giá</button> : <></>
                                                         }
                                                     </div>
                                                 </div>
