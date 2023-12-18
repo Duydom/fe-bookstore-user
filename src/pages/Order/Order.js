@@ -12,6 +12,7 @@ function Order() {
     const [total, setTotal] = useState(0)
     const [books, setBook] = useState([])
     const [quantities, setQuantities] = useState([])
+    const [addresses, setAddresses] = useState([])
     const [address, setAddress] = useState([])
     const [guestAddress, setGuestAddress] = useState({
         name: "",
@@ -19,7 +20,7 @@ function Order() {
         city: "",
         state: "",
         phone: "",
-        userId: 9
+        userId: 2
     })
     const [shippingMode, setShippingMode] = useState(1)
     const [shippingModes, setShippingModes] = useState([])
@@ -34,19 +35,20 @@ function Order() {
         setBook(JSON.parse(sessionStorage.getItem('order')).books);
         setQuantities(JSON.parse(sessionStorage.getItem('order')).quantities);
 
+        console.log(books);
+
         var res = await GetAddressByUser(sessionStorage.getItem('userId'))
         if (res?.code == 200) {
-            setAddress(res?.data[0]);
+            setAddresses(res?.data);
         }
 
         var res = await GetShippingModes()
         if (res?.code == 200)
             setShippingModes(res?.data);
-        console.log(res?.data);
 
         var sum = 0;
         for (var index = 0; index < JSON.parse(sessionStorage.getItem('order')).books?.length; index++) {
-            sum += JSON.parse(sessionStorage.getItem('order')).books[index]?.price * JSON.parse(sessionStorage.getItem('order')).quantities[index]?.count
+            sum += JSON.parse(sessionStorage.getItem('order')).books[index]?.price * JSON.parse(sessionStorage.getItem('order')).quantities[index].count
         }
         setTotal(sum)
 
@@ -62,7 +64,7 @@ function Order() {
                 var order = {
                     status: "CRE",
                     description: "",
-                    userId: 9,//sessionStorage.getItem('userId') ? parseInt(sessionStorage.getItem('userId')) : 9,
+                    userId: 2,//sessionStorage.getItem('userId') ? parseInt(sessionStorage.getItem('userId')) : 2,
                     shippingModeId: shippingMode,
                     addressId: res?.data?.id,
                     quantitieCounts: [
@@ -91,7 +93,7 @@ function Order() {
                 description: "",
                 userId: parseInt(sessionStorage.getItem('userId')),
                 shippingModeId: shippingMode,
-                addressId: address?.id,
+                addressId: address,
                 quantitieCounts: [
 
                 ],
@@ -132,7 +134,25 @@ function Order() {
                         >
                             {
                                 (sessionStorage.getItem("userId")) ?
-                                    (address?.name + ' - ' + address?.phone + " | " + address?.street + ", " + address?.state + " , " + address?.city)
+                                    <>
+                                        <div style={{
+                                            display: "flex",
+                                            flexDirection: "column"
+                                        }}>
+                                            <a style={{
+                                                marginBottom: "10px"
+                                            }} onClick={() => navigate('/account/address')}>+ Thêm địa chỉ</a>
+                                            <Radio.Group onChange={(e) => setAddress(e.target.value)}>
+                                                <Space direction="vertical">
+                                                    {
+                                                        addresses?.map((item, index) => (
+                                                            <Radio value={item?.id}>{item?.name + " - " + item?.phone + ", " + item?.street + ", " + item?.state + ", " + item?.city}</Radio>
+                                                        ))
+                                                    }
+                                                </Space>
+                                            </Radio.Group>
+                                        </div>
+                                    </>
                                     :
                                     <div className='guest-address'>
                                         <div className='guest-line'>

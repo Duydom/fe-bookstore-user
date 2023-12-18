@@ -113,7 +113,7 @@ function Book(props) {
     const [wait, setWait] = useState(false)
     const [page, setPage] = useState(1)
     const [total, setTotal] = useState(0)
-    const [key, setkey] = useState("")
+    const [key, setkey] = useState(location?.state?.search? location?.state?.search : "")
     const [tagId, setTagId] = useState(location?.state?.key? location?.state?.key : 0)
     const [sortBy, setSortBy] = useState("ID")
     const [priceSort, setPriceSort] = useState([])
@@ -177,6 +177,7 @@ function Book(props) {
                                     marginBottom: "10px"
                                 }}>Tên sản phẩm</div>
                                 <Input
+                                defaultValue={key}
                                     onChange={(e) => setkey(e.target.value)}
                                     className='book-filter-name'
                                     placeholder='Tên sản phẩm' style={{

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './Navbar.css'
 import { SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Popover } from 'antd';
 import { GetUserById } from '../../axios/AuthAPI';
 
 function Navbar() {
     const navigate = useNavigate();
     const [content, setContent] = useState()
+    const [key, setKey] = useState("")
 
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [sessionStorage.getItem('userId')])
 
     const fetchData = async () => {
         if (!sessionStorage.getItem('userId')) {
@@ -68,7 +69,7 @@ function Navbar() {
                             flexDirection: "column"
                         }}>
                             <span style={{ marginLeft: "15px", fontWeight: "600" }}>{res?.data?.firstName + " " + res?.data?.lastName}</span>
-                            <span style={{ marginLeft: "15px", color:"rgba(0,0,0,0.5)" }}>Thành viên BookStore</span>
+                            <span style={{ marginLeft: "15px", color: "rgba(0,0,0,0.5)" }}>Thành viên BookStore</span>
                         </div>
                     </div>
 
@@ -125,9 +126,10 @@ function Navbar() {
                 </div>
             </div>
             <div className='navbar-search'>
-                <input className='navbar-input'></input>
-                <SearchOutlined className='navbar-icon' />
-                {/* <button className='navbar-search-btn'><SearchOutlined /></button> */}
+                <input className='navbar-input' onChange={(e) => setKey(e.target.value)}></input>
+                <Link state={{ search: key}} to={{ pathname: '/book' }} style={{ color: "#000" }} >
+                    <SearchOutlined className='navbar-icon' />
+                </Link>
             </div>
             <div className='navbar-footer'>
                 <div style={{ cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", marginRight: "20px" }}>

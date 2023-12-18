@@ -21,10 +21,10 @@ function History() {
         setWait(false)
     }
 
-    const CalculateMoney = (books, quantities) => {
+    const CalculateMoney = (orderBooks) => {
         var total = 0;
-        for (var i = 0; i < books.length; i++) {
-            total += books[i]?.price * quantities[i]?.count
+        for (var i = 0; i < orderBooks.length; i++) {
+            total += orderBooks[i]?.book?.price * orderBooks[i]?.quantity
         }
         return total
     }
@@ -91,7 +91,7 @@ function History() {
                                                             {Intl.NumberFormat('vi-VN', {
                                                                 style: 'currency',
                                                                 currency: 'VND',
-                                                            }).format(CalculateMoney(history?.books, history?.quantities))}
+                                                            }).format(CalculateMoney(history?.orderBooks))}
                                                         </div>
                                                         <div style={{
                                                             width: "20%"

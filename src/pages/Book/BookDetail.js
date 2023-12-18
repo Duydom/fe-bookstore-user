@@ -1,7 +1,7 @@
 import { Button, Card, Carousel, Col, Image, List, Row } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { GetBookById } from '../../axios/BookAPI';
+import { GetBookById, GetBookByIds, GetBooksRecomend } from '../../axios/BookAPI';
 import "./BookDetail.css";
 import AddToCartAPI, { AddToCart } from '../../axios/CartAPI'
 import Waiting from '../Waiting/Waiting';
@@ -17,9 +17,14 @@ function BookDetail() {
     const [quantity, setQuantity] = useState(1)
     const [page, setPage] = useState(1)
     const [wait, setWait] = useState(false)
+    const [bookRecomends, setBookRecomend] = useState([])
 
     useEffect(() => {
-        // window.location.reload()
+        // window.scrollTo({
+        //     top: 0,
+        //     behavior: 'smooth',
+        // })
+        window.scrollTo(0, 0)
         fecthData()
     }, [param, page])
 
@@ -33,6 +38,12 @@ function BookDetail() {
         var res = await GetRatingByBook(param?.id, page)
         if (res?.code == 200)
             setRating(res?.data)
+
+        var res = await GetBooksRecomend(param?.id)
+        if (res?.code == 200) {
+            var response = await GetBookByIds(res?.data)
+            if (response?.code == 200) setBookRecomend(response?.data)
+        }
 
         console.log(res);
         setWait(false)
@@ -232,12 +243,12 @@ function BookDetail() {
                             {
                                 rating?.ratings?.map((rate, index) => (
                                     <div style={{ display: "flex", marginTop: "10px" }}>
-                                        <div style={{ width: "170px", marginRight: "10px", display : "flex", flexDirection:"column" }}>
-                                            <span style={{fontWeight: "600"}}>
+                                        <div style={{ width: "170px", marginRight: "10px", display: "flex", flexDirection: "column" }}>
+                                            <span style={{ fontWeight: "600" }}>
                                                 {rate?.user?.firstName + " " + rate?.user?.lastName}
                                             </span>
                                             <span>
-                                                {moment(rate?.create?.slice(0,10)).format('DD/MM/YYYY')}
+                                                {moment(rate?.create?.slice(0, 10)).format('DD/MM/YYYY')}
                                             </span>
                                         </div>
                                         <div style={{ width: "calc(100%-180px)" }}>
@@ -260,6 +271,106 @@ function BookDetail() {
                                     </div>
                                 ))
                             }
+                        </div>
+                    </Card>
+                </Col>
+            </Row>
+
+
+            <Row gutter={[24, 0]} className="mb-24">
+                <Col span={24} md={24}>
+                    <Card style={{
+                        borderRadius: 0
+                    }}
+                        className='book-details-card-list-book'
+                        title={
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center"
+                                }}
+                            >
+                                <span className='book-details-icon-list-book'></span>
+                                <h3 style={{
+                                    margin: 0
+                                }}>CÓ THỂ BẠN CŨNG THÍCH</h3>
+                            </div>
+                        }
+                    >
+                        <List
+                            className='book-details-list-book'
+                            grid={{
+                                gutter: 12,
+                                xs: 1,
+                                sm: 2,
+                                md: 3,
+                                lg: 4,
+                                xl: 5,
+                                xxl: 5,
+                            }}
+                            dataSource={bookRecomends}
+                            renderItem={(item) => (
+                                <List.Item>
+                                    <Card bordered={false}
+                                        style={{
+                                            // outline: "none",
+                                            borderRadius: 0
+                                        }}
+                                        className='book-details-book'
+                                    >
+                                        <div style={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                        }}>
+                                            <div style={{
+                                                cursor: "pointer"
+                                            }}
+                                                onClick={() => navigate(`/book/${item?.id}`)}>
+                                                <Image src={item?.image} preview={false}
+                                                    height={240}
+                                                    width={190}
+                                                    style={{
+                                                        objectFit: "cover"
+                                                    }}
+                                                ></Image>
+                                                <div className='book-details-book-detail'>
+                                                    <Link
+                                                        className='book-details-book-title'
+                                                    >
+                                                        {item?.title}
+                                                    </Link>
+                                                    <div className='book-details-book-detail-price'>
+                                                        {Intl.NumberFormat('vi-VN', {
+                                                            style: 'currency',
+                                                            currency: 'VND',
+                                                        }).format(item?.price)}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </List.Item>
+                            )}
+                        />
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "center",
+                        }}>
+                            <Button style={{
+                                color: "#C92127",
+                                border: "2px solid #C92127",
+                                fontSize: "18px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                height: "40px",
+                                width: "150px",
+                                marginTop: "14px"
+                            }}
+                                onClick={() => navigate("/book")}
+                            >Xem thêm</Button>
                         </div>
                     </Card>
                 </Col>
