@@ -155,7 +155,7 @@ function BookDetail() {
                                             padding: "0px 20px",
                                             fontSize: "18px",
                                             fontWeight: "600"
-                                        }} onClick={() => setQuantity(quantity + 1)}>+</button>
+                                        }} onClick={() => setQuantity(quantity + 1)} disabled={quantity == book?.count ? true : false}>+</button>
                                     </div>
                                 </div>
                                 <div className='book-detail-button'>

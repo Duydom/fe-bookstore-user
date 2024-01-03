@@ -70,7 +70,8 @@ function HistoryDetail() {
                                                         history?.status == "DON" ? "Đã hoàn thành" :
                                                             history?.status == "CAN" ? "Đã bị hủy" :
                                                                 history?.status == "INP" ? "Đang được vận chuyển" :
-                                                                    "Đang chờ xác nhận"
+                                                                    history?.status == "PAY" ? "Đã thanh toán" :
+                                                                        "Đang chờ xác nhận"
                                                     }
                                                 </span>
                                             </div>
@@ -102,9 +103,11 @@ function HistoryDetail() {
 
                                             <div>
                                                 Phương thức thanh toán:
-                                                <span>
-                                                    Thanh toán khi nhận hàng
-                                                </span>
+                                                {
+                                                    history?.payMode == "CASH" ?
+                                                        <span>Thanh toán khi nhận hàng</span> :
+                                                        <span>VN Pay</span>
+                                                }
                                             </div>
                                         </div>
                                     </Card>

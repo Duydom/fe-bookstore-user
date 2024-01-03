@@ -15,6 +15,7 @@ import Order from './pages/Order/Order';
 import History from './pages/History/History';
 import HistoryDetail from './pages/History/HistoryDetail';
 import Rating from './pages/Rating/Rating';
+import Payment from './pages/Payment/Payment';
 
 function Layout() {
   return (
@@ -62,6 +63,9 @@ function App() {
           <Route path='order' element={<Order />} />
 
           <Route path='rating/:id' element={<Rating />} />
+
+          <Route path='/vnpay-return' element={<Payment />} />
+
           {/* <Route path="/booking" element={<Booking />} />
 
           <Route path='service' element={<Service />} />
