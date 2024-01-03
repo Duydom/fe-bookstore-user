@@ -37,3 +37,9 @@
     border-color: #ff2727;
     background: #ff3434;
 }
+
+.pay,
+.pay:hover {
+    border-color: #ffd60a;
+    background: #ffd60a;
+}

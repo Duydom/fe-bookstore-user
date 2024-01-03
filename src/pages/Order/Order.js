@@ -3,6 +3,7 @@ import Waiting from '../Waiting/Waiting'
 import { Card, Col, Image, Input, List, Radio, Row, Space, Typography } from 'antd'
 import './Order.css'
 import { CreateAddress, GetAddressByUser } from '../../axios/AccountAPI'
+import { CreateUrlPayment } from '../../axios/PaymentAPI'
 import { CreateOrder, GetShippingModes } from '../../axios/OrderAPI'
 import { useNavigate } from 'react-router-dom'
 import { ClockCircleOutlined, WarningOutlined } from '@ant-design/icons'
@@ -10,6 +11,7 @@ import { ClockCircleOutlined, WarningOutlined } from '@ant-design/icons'
 function Order() {
     const [wait, setWait] = useState(false)
     const [total, setTotal] = useState(0)
+    const [payment, setPayment] = useState(0)
     const [books, setBook] = useState([])
     const [quantities, setQuantities] = useState([])
     const [addresses, setAddresses] = useState([])
@@ -110,6 +112,11 @@ function Order() {
             var res = await CreateOrder(order)
 
             if (res?.code == 200) {
+                if(payment == 2){
+                    var res = await CreateUrlPayment(res?.data?.id, total)
+                    if (res.code == 200) window.location = res?.data
+                }
+                else
                 navigate('/account/history')
             }
         }
@@ -276,10 +283,10 @@ function Order() {
                                 </div>
                             )}
                         >
-                            <Radio.Group defaultValue={1}>
+                            <Radio.Group defaultValue={1} onChange={(e)=>setPayment(e.target.value)}>
                                 <Space direction="vertical">
                                     <Radio value={1}>Thanh toán khi nhận hàng</Radio>
-                                    <Radio value={2} disabled><Image src='https://cdn0.fahasa.com/skin/frontend/base/default/images/payment_icon/ico_vnpay.svg?q=10298' />   VN Pay (Đang phát triển)</Radio>
+                                    <Radio value={2}><Image src='https://cdn0.fahasa.com/skin/frontend/base/default/images/payment_icon/ico_vnpay.svg?q=10298' />   VN Pay (Đang phát triển)</Radio>
                                 </Space>
                             </Radio.Group>
                         </Card>
@@ -417,7 +424,7 @@ function Order() {
                                         color: "#fff",
                                         fontSize: "16px",
                                         // fontWeight:"600"
-                                    }} onClick={Order}>THANH TOÁN</button>
+                                    }} onClick={Order}>ĐẶT HÀNG</button>
                                 </div>
                             </div>
                         </Card>

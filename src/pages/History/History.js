@@ -100,6 +100,7 @@ function History() {
                                                                 {history?.status == "CAN" ? "Đã hủy" :
                                                                     history?.status == "DON" ? "Hoàn thành" :
                                                                         history?.status == "INP" ? "Đang giao hàng" :
+                                                                        history?.status == "PAY" ? "Đã thanh toán" :
                                                                             "Chờ xác nhận"
                                                                 }
                                                             </span>
