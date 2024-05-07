@@ -28,7 +28,7 @@ function Footer() {
                 <div style={{ fontSize: "18px", fontWeight: "600" }}>DỊCH VỤ</div>
                 <span style={{ margin: "5px 0px" }}>Điều khoản sử dụng</span>
                 <span style={{ margin: "5px 0px" }}>Chính sách bảo mật</span>
-                <span style={{ margin: "5px 0px" }}>Giới thiệu BookStore.com</span>
+                <span style={{ margin: "5px 0px" }}>Giới thiệu ShoeStore.com</span>
               </div>
             </Col>
 

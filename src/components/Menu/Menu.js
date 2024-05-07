@@ -19,7 +19,7 @@ function Menu() {
                         <ul>
                             <li onClick={()=>navigate('/account')}>Thông tin tài khoản</li>
                             <li onClick={()=>navigate('/account/address')}>Địa chỉ nhận hàng</li>
-                            <li onClick={()=>navigate('/account/history')}>Lịch sử đặt sách</li>
+                            <li onClick={()=>navigate('/account/history')}>Lịch sử đặt giày</li>
                         </ul>
                     </Card>
                 </Col>

@@ -107,10 +107,10 @@ function BookDetail() {
                             >
                                 <div className='book-detail-name'><h2 style={{ margin: "0px", textTransform: "uppercase" }}>{book?.title}</h2></div>
                                 <div className='book-detail-more'>
-                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Nhà xuất bản: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.publisher?.name}</div></div>
+                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Thương hiệu: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.publisher?.name}</div></div>
                                     <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Năm xuất bản: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.publishDate?.slice(0, 4)}</div></div>
-                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Tác giả: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.author?.name}</div></div>
-                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Ngôn ngữ: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.language}</div></div>
+                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Kích thước: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.size}</div></div>
+                                    <div style={{ margin: "20px 0px", display: "flex", alignItems: "center" }}>Số lượng: <div style={{ fontSize: "18px", fontWeight: "400", margin: "0px 0px 0px 10px", fontWeight: "600" }}>{book?.count}</div></div>
                                     <div style={{ display: "flex", alignItems: "center" }}>Thể loại: {book?.tags?.map((tag, index) => (
                                         <div style={{
                                             border: "1px solid rgba(180,180,180,0.8)",
@@ -391,7 +391,7 @@ function BookDetail() {
                                 <span className='book-detail-recomment-icon'></span>
                                 <h3 style={{
                                     margin: 0
-                                }}>SÁCH NỔI BẬT</h3>
+                                }}>GIÀY NỔI BẬT</h3>
                             </div>
                         }
                     >

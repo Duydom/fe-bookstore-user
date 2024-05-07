@@ -160,7 +160,7 @@ function HistoryDetail() {
                                                 // borderBottom: "1px solid red"
                                             }}>
                                                 <div style={{ fontWeight: "700", width: "15%" }}>Hình ảnh</div>
-                                                <div style={{ fontWeight: "700", width: "40%" }}>Tên sách</div>
+                                                <div style={{ fontWeight: "700", width: "40%" }}>Tên sản phẩm</div>
                                                 <div style={{ fontWeight: "700", width: "10%" }}>Giá bán</div>
                                                 <div style={{ fontWeight: "700", width: "10%" }}>SL</div>
                                                 <div style={{ fontWeight: "700", width: "15%" }}>Thành tiền</div>

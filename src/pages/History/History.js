@@ -54,7 +54,7 @@ function History() {
                                         alignItems: "center"
                                     }}>
                                         <div>
-                                            LỊCH SỬ ĐẶT SÁCH
+                                            LỊCH SỬ ĐẶT GIÀY
                                         </div>
                                     </div>
                                 )}

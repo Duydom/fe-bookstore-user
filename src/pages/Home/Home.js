@@ -19,23 +19,23 @@ const contentStyle = {
 const data = [
     {
         title: 'Văn học',
-        image: 'https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/tpkds1.jpg',
+        image: 'https://streetstyleshop.vn/wp-content/uploads/2020/08/gi%C3%A0y-th%E1%BB%83-thao-nam-m%E1%BB%9Bi-nh%E1%BA%A5t-2-1.jpg',
     },
     {
         title: 'Tiểu thuyết',
-        image: 'https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/Ti_u_Thuy_t.jpg',
+        image: 'https://cungnhaulamgiau.vn/index/img/product/2023/09/03/CNLG_1693758102.jpg',
     },
     {
         title: 'Thiếu nhi',
-        image: 'https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/thieunhis2.jpg',
+        image: 'https://bizweb.dktcdn.net/100/301/479/products/giay-cau-long-bong-chuyen-nam-nu-gia-re-3.jpg?v=1641268394260',
     },
     {
         title: 'Kinh tế',
-        image: 'https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/9786043654370.jpg',
+        image: 'https://pos.nvncdn.com/be3294-43017/art/20220612_UQ6ghXLo6AejeaPwUIJqfrfs.jpg',
     },
     {
         title: 'Tâm lý',
-        image: 'https://cdn0.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/Thao_t_ng.jpg',
+        image: 'https://product.hstatic.net/1000011840/product/giay-banh-xe-giay-truot-patin-tre-em-gb01_master.jpg',
     },
     {
         title: 'Tâm linh',
@@ -90,19 +90,19 @@ function Home() {
                         cover={
                             <Carousel autoplay>
                                 <div>
-                                    <img src='https://cdn0.fahasa.com/media/magentothem/banner7/Manga_mainbanner_T10_Slide_840x320_1.jpg' style={contentStyle}></img>
+                                    <img src='https://cdn.authentic-shoes.com/wp-content/uploads/2024/02/Authentic-Shoes-Jordan-4-Bread-2048x648.webp' style={contentStyle}></img>
                                 </div>
                                 <div>
-                                    <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCCMcBooksT1023_Silver_BannerSlide_840x320.jpg' style={contentStyle}></img>
+                                    <img src='https://cdn.authentic-shoes.com/wp-content/uploads/2024/01/BrandCampaign_LaunchBanners_Prim-1-2048x623.webp' style={contentStyle}></img>
                                 </div>
                                 <div>
-                                    <img src='https://cdn0.fahasa.com/media/magentothem/banner7/WimpyKid_banner_840x320.jpg' style={contentStyle}></img>
+                                    <img src='https://cdn.authentic-shoes.com/wp-content/uploads/2024/01/AJ1_Yellow_Ochre_Release_DayPrim-2048x625.webp' style={contentStyle}></img>
                                 </div>
                                 <div>
-                                    <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCCDinhTiT1023_Diamond_BannerSlide_840x320.jpg' style={contentStyle}></img>
+                                    <img src='https://cdn.authentic-shoes.com/wp-content/uploads/2023/09/image-54-2048x711-2.webp' style={contentStyle}></img>
                                 </div>
                                 <div>
-                                    <img src='https://cdn0.fahasa.com/media/magentothem/banner7/NCC1980BooksT1023_Gold_BannerSlide_840x320.jpg' style={contentStyle}></img>
+                                    <img src='https://cdn.authentic-shoes.com/wp-content/uploads/2024/01/Designer-Below-Retail-Apparel-an-2048x648.webp' style={contentStyle}></img>
                                 </div>
                             </Carousel>
                         }
@@ -177,7 +177,7 @@ function Home() {
                 </Col>
             </Row>
             <Row gutter={[24, 0]} className="mb-24">
-                <Col span={24} md={6}>
+                <Col span={24} md={8}>
                     <Card
                         style={{ borderRadius: "0px" }}
                         bordered={false}
@@ -193,11 +193,11 @@ function Home() {
                             preview={false}
                             // height={210}
                             width={"100%"}
-                            src='https://cdn0.fahasa.com/media/wysiwyg/Thang-11-2023/Quatang_FahasaT3_840x320_SmallBanner_310x210.png'
+                            src='https://theme.hstatic.net/1000150581/1001194384/14/lookbook_1_image.jpg?v=365'
                         />
                     </Card>
                 </Col>
-                <Col span={24} md={6}>
+                <Col span={24} md={8}>
                     <Card
                         style={{ borderRadius: "0px" }}
                         bordered={false}
@@ -213,11 +213,11 @@ function Home() {
                             preview={false}
                             // height={210}
                             width={"100%"}
-                            src='https://cdn0.fahasa.com/media/wysiwyg/Thang-11-2023/TrangThieuNhiT923_Banner_SmallBanner_310x210-22_1.png'
+                            src='https://theme.hstatic.net/1000150581/1001194384/14/lookbook_2_image.jpg?v=365'
                         />
                     </Card>
                 </Col>
-                <Col span={24} md={6}>
+                <Col span={24} md={8}>
                     <Card
                         style={{ borderRadius: "0px" }}
                         bordered={false}
@@ -233,27 +233,7 @@ function Home() {
                             preview={false}
                             // height={210}
                             width={"100%"}
-                            src='https://cdn0.fahasa.com/media/wysiwyg/Thang-11-2023/20_11_mainbanner_Smallbanner_310x210.png'
-                        />
-                    </Card>
-                </Col>
-                <Col span={24} md={6}>
-                    <Card
-                        style={{ borderRadius: "0px" }}
-                        bordered={false}
-                        className="header-solid h-full ant-invoice-card"
-                        bodyStyle={{
-                            padding: '0px'
-                        }}
-                    >
-                        <Image
-                            style={{
-                                objectFit: "cover"
-                            }}
-                            preview={false}
-                            // height={210}
-                            width={"100%"}
-                            src='https://cdn0.fahasa.com/media/wysiwyg/Thang-11-2023/TopSanPhamT1023_Banner_SmallBanner_310x210.png'
+                            src='https://theme.hstatic.net/1000150581/1001194384/14/lookbook_3_image.jpg?v=365'
                         />
                     </Card>
                 </Col>
@@ -274,7 +254,7 @@ function Home() {
                                 <span className='home-icon-list-book most'></span>
                                 <h3 style={{
                                     margin: 0
-                                }}>SÁCH NỔI BẬT</h3>
+                                }}>GIÀY NỔI BẬT</h3>
                             </div>
                         }
                     >
@@ -356,7 +336,7 @@ function Home() {
                 </Col>
             </Row>
 
-            <Row gutter={[24, 0]} className="mb-24">
+            {/* <Row gutter={[24, 0]} className="mb-24">
                 <Col span={24} md={24}>
                     <Card style={{
                         borderRadius: 0
@@ -372,7 +352,7 @@ function Home() {
                                 <span className='recomend'></span>
                                 <h3 style={{
                                     margin: 0
-                                }}>SÁCH NỔI BẬT</h3>
+                                }}>GIÀY NỔI BẬT</h3>
                             </div>
                         }
                     >
@@ -452,7 +432,7 @@ function Home() {
                         </div>
                     </Card>
                 </Col>
-            </Row>
+            </Row> */}
         </div>
     )
 }
